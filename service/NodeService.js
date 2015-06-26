@@ -49,7 +49,7 @@ exports.deleteNode = function(req, res) {
         console.log('node:', node.toJSON());
         sequelize.transaction(function(t) {
             return Promise.all([
-                Node.destroy({where:{nodeId: req.query.nodeid}, transaction: t}),
+                Node.destroy({where: {leftValue: {$gte: node.leftValue}, rightValue: {$lte: node.rightValue}}, transaction: t}),
                 sequelize.query('UPDATE node SET left_value = left_value - (:right - :left + 1) WHERE left_value > :left', {type: sequelize.QueryTypes.UPDATE, transaction: t, replacements: {left: node.leftValue, right: node.rightValue}}),
                 sequelize.query('UPDATE node SET right_value = right_value - (:right - :left + 1) WHERE right_value > :right', {type: sequelize.QueryTypes.UPDATE, transaction: t, replacements: {left: node.leftValue, right: node.rightValue}})
             ]);
