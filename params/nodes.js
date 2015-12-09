@@ -7,8 +7,6 @@ var nodes = module.exports = {};
 nodes.NodeParam = function(attrs) {
     this.nodeId = undefined;
     this.nodeName = undefined;
-    this.leftValue = undefined;
-    this.rightValue = undefined;
     this.parentId = undefined;
 
     attrs && _.extend(this,  attrs);
