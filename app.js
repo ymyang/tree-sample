@@ -1,3 +1,4 @@
+var http = require('http');
 var morgan = require('morgan');
 var express = require('express');
 var cookieParser = require('cookie-parser');
@@ -11,7 +12,6 @@ var app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
@@ -49,4 +49,5 @@ app.use(function(err, req, res, next) {
   res.send(err.message);
 });
 
-module.exports = app;
+var server = http.createServer(app);
+server.listen(3000);
