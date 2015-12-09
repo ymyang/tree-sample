@@ -22,7 +22,9 @@ var customLevels = {
     }
 };
 
-models.logger = new (winston.Logger)({
+winston.addColors(customLevels.colors);
+
+module.exports = new (winston.Logger)({
     levels: customLevels.levels,
     transports: [
         new (winston.transports.Console)({

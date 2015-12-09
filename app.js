@@ -1,9 +1,10 @@
+const TAG = '[app]';
 var http = require('http');
 var morgan = require('morgan');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var logger = require('./util/logger.js').logger;
+var logger = require('./util/logger.js');
 
 var routes = require('./routes/index');
 var tree = require('./routes/tree');
@@ -51,3 +52,13 @@ app.use(function(err, req, res, next) {
 
 var server = http.createServer(app);
 server.listen(3000);
+
+server.on('listening', onListening);
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+  logger.info(TAG, 'Listening on ', bind);
+}

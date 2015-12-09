@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var logger = require('../util/logger.js').logger;
+var logger = require('../util/logger.js');
 var config = require('../config.json');
 var models = module.exports = {};
 

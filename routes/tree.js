@@ -1,5 +1,5 @@
 var express = require('express');
-var NodeService = require('../service/NodeService.js');
+var NodeCtrl = require('../controller/NodeCtrl.js');
 var router = express.Router();
 
 /* GET users listing. */
@@ -7,9 +7,9 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/', NodeService.insertNode);
-router.delete('/', NodeService.deleteNode);
-router.get('/children', NodeService.getChildren);
-router.get('/parents', NodeService.getParents);
+router.post('/', NodeCtrl.insertNode);
+router.delete('/', NodeCtrl.deleteNode);
+router.get('/children', NodeCtrl.getChildren);
+router.get('/parents', NodeCtrl.getParents);
 
 module.exports = router;
