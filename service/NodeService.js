@@ -58,12 +58,14 @@ NodeService.getChildren = function(nodeid) {
         console.log('node:', node.toJSON());
         return Node.findAndCountAll({
             where: {leftValue: {$gt: node.leftValue, $lt: node.rightValue}},
-            order: ['nodeName']
+            order: 'convert(node_name using gbk)' //sequelize.literal('convert(node_name using gbk)')
         });
     }).then(function(result) {
         return {
             count: result.count,
-            children: result.rows
+            children: result.rows.map(function(r) {
+                return r.dataValues;
+            })
         };
     });
 };
@@ -73,12 +75,14 @@ NodeService.getParents = function(nodeid) {
         console.log('node:', node.toJSON());
         return Node.findAndCountAll({
             where: {leftValue: {$lt: node.leftValue}, rightValue: {$gt: node.rightValue}},
-            order: ['leftValue']
+            order: 'left_value'
         });
     }).then(function(result) {
         return {
             count: result.count,
-            parents: result.rows
+            parents: result.rows.map(function(r) {
+                return r.dataValues;
+            })
         };
     });
 };

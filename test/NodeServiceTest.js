@@ -25,7 +25,7 @@ describe('NodeService', function() {
         }).catch(done);
     });
 
-    it('getChildren', function(done) {
+    it.only('getChildren', function(done) {
         var nodeid = 1;
         NodeService.getChildren(nodeid).then(function(r) {
             console.log('getChildren:', JSON.stringify(r));
@@ -33,7 +33,7 @@ describe('NodeService', function() {
         }).catch(done);
     });
 
-    it.only('getParents', function(done) {
+    it('getParents', function(done) {
         var nodeid = 12;
         NodeService.getParents(nodeid).then(function(r) {
             console.log('getParents:', JSON.stringify(r));
